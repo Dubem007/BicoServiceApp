@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  bicoauthappservice:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - 8055:80
+    #volumes:
+    #  - ~/.aspnet/https:/root/.aspnet/https:ro
+    #  - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+  #ms-sqlserver2022:
+  #  ports:
+  #    - "1433"
+  #  volumes:
+  #    - ${APPDATA}/data:/var/opt/mssql/data
+  #    - ${APPDATA}/log:/var/opt/mssql/log
+  #    - ${APPDATA}/secrets:/var/opt/mssql/secrets

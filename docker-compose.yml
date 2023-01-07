@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  bicoauthappservice:
+    image: bicoauthappservice
+    container_name: bicoauthappservice_container
+    ports:
+      - 8055:80
+    build:
+      context: .
+      dockerfile: BicoAuthService/Dockerfile 
+    depends_on:
+      - ms-sqlserver2022
+    
+
+  ms-sqlserver2022:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: ms-sqlserver2022
+    ports: # not actually needed, because the two services are on the same network.
+      - 1431:1433 
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: A&VeryComplex123Password
+      MSSQL_PID: Express
+    volumes:
+      - ${APPDATA}/data:/var/opt/mssql/data
+      - ${APPDATA}/log:/var/opt/mssql/log
+      - ${APPDATA}/secrets:/var/opt/mssql/secrets
